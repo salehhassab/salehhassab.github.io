@@ -62,11 +62,19 @@ main { min-height: 70vh; padding-block: 2.5rem 4rem; outline: none; }
 .nav a.active { background: var(--ink); color: var(--paper); }
 .menu-toggle { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; font-size: 1.2rem; padding: .2rem .6rem; cursor: pointer; color: var(--ink); }
 
+/* ملاحظة التطوير */
+.dev-notice {
+  background: #b42318; color: #fff; text-align: center;
+  font-size: .92rem; font-weight: 600; padding: .45rem 1rem; letter-spacing: .01em;
+}
+
 /* الصفحة الرئيسية */
 .hero {
   display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; align-items: center;
   padding: 2.5rem 0 3rem; border-bottom: 1px solid var(--line); margin-bottom: 2.5rem;
 }
+.hero-title { margin-bottom: .1em; }
+.hero-sub { font-family: var(--serif); font-size: clamp(1.15rem, 2.2vw, 1.5rem); color: var(--accent); margin: 0 0 .8rem; }
 .hero p.lead { font-size: 1.15rem; color: var(--ink-2); max-width: 36ch; }
 .hero-card {
   background: var(--ink); color: var(--paper); border-radius: var(--radius);

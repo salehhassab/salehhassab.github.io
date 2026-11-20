@@ -3,7 +3,7 @@
 
   var TERMS = window.TERMS || [];
   var RESEARCH = window.RESEARCH || [];
-  var SITE = window.SITE || { name: "اسم الباحث", tagline: "", bio: "", email: "" };
+  var SITE = window.SITE || { title: "الثقافة الإسلامية", subtitle: "موسوعة ثقافية وأبحاث", tagline: "", bio: "", email: "" };
   var app = document.getElementById("app");
 
   var ALPHABET = "ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي".split(" ");
@@ -80,7 +80,7 @@
   }
 
   function setTitle(t) {
-    document.title = (t ? t + " — " : "") + SITE.name;
+    document.title = (t ? t + " — " : "") + SITE.title;
   }
 
   // ---------- الصفحات ----------
@@ -94,7 +94,8 @@
     app.innerHTML =
       '<section class="hero">' +
         "<div>" +
-          "<h1>" + esc(SITE.name) + "</h1>" +
+          '<h1 class="hero-title">' + esc(SITE.title) + "</h1>" +
+          (SITE.subtitle ? '<p class="hero-sub">' + esc(SITE.subtitle) + "</p>" : "") +
           '<p class="lead">' + esc(SITE.tagline) + "</p>" +
           '<form class="search" id="home-search" role="search">' +
             '<input type="search" id="home-q" placeholder="ابحث عن مصطلح… مثل: هوية، تراث، Culture" aria-label="البحث في الموسوعة">' +
@@ -140,7 +141,7 @@
 
     app.innerHTML =
       '<div class="crumbs"><a href="#">الرئيسية</a> / الموسوعة</div>' +
-      "<h1>موسوعة المصطلحات الثقافية</h1>" +
+      "<h1>الموسوعة الثقافية</h1>" +
       '<p class="muted">مداخل مرتبة ترتيباً أبجدياً بحسب أصل الكلمة دون «ال» التعريف. البحث يتجاهل التشكيل واختلاف الهمزات.</p>' +
       '<div class="search"><input type="search" id="enc-q" placeholder="ابحث بالعربية أو بالمقابل الأجنبي…" aria-label="البحث"></div>' +
       '<div class="toolbar">' +
@@ -253,7 +254,7 @@
     document.getElementById("cite-btn").addEventListener("click", function () {
       var today = new Date().toLocaleDateString("ar", { year: "numeric", month: "long", day: "numeric" });
       var url = location.href;
-      var text = SITE.name + "، «" + t.term + "»، موسوعة المصطلحات الثقافية، " + url + "، تاريخ الاطلاع: " + today + ".";
+      var text = "«" + t.term + "»، " + SITE.title + (SITE.subtitle ? ": " + SITE.subtitle : "") + "، " + url + "، تاريخ الاطلاع: " + today + ".";
       var box = document.getElementById("cite-box");
       box.hidden = false;
       box.textContent = text;
@@ -316,11 +317,11 @@
   }
 
   function viewAbout() {
-    setTitle("عن الباحث");
+    setTitle("عن الموقع");
     app.innerHTML =
-      '<div class="crumbs"><a href="#">الرئيسية</a> / عن الباحث</div>' +
+      '<div class="crumbs"><a href="#">الرئيسية</a> / عن الموقع</div>' +
       '<section class="about">' +
-        "<h1>" + esc(SITE.name) + "</h1>" +
+        "<h1>عن الموقع</h1>" +
         '<p class="bio">' + esc(SITE.bio) + "</p>" +
         '<h2 style="font-size:1.3rem">التواصل</h2>' +
         '<p>البريد الإلكتروني: <span dir="ltr">' + esc(SITE.email) + "</span></p>" +
@@ -352,8 +353,11 @@
   }
 
   // ---------- التهيئة ----------
-  Array.prototype.forEach.call(document.querySelectorAll('[data-site="name"]'), function (el) {
-    el.textContent = SITE.name;
+  Array.prototype.forEach.call(document.querySelectorAll('[data-site="title"]'), function (el) {
+    el.textContent = SITE.title;
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-site="subtitle"]'), function (el) {
+    el.textContent = SITE.subtitle || "";
   });
   document.getElementById("year").textContent = new Date().getFullYear();
   var toggle = document.querySelector(".menu-toggle");
